@@ -1,12 +1,7 @@
-# TRABAJO TRACTICO NRO 1 - BASE DE DATOS II
+----------------------------------------------------------
+-- TABLES
+----------------------------------------------------------
 
-### PROCEDIMIENTOS Y DISPARADORES
-***Autor:*** Leonardo Ariel Sequeira <br>
-***Legajo:*** 112776 <br>
-
-
-#### TABLAS
-```sql
 CREATE TABLE TABLA_FACTURA
 (
     NRO INT NOT NULL PRIMARY KEY,
@@ -45,39 +40,28 @@ ADD ESTADO SMALLINT DEFAULT 0 NOT NULL;
 ALTER TABLE TABLA_FACTURA
 ADD FECHA DATE;
 
-```
+----------------------------------------------------------
+-- GENERATORS
+----------------------------------------------------------
 
-* * *
-#### GENERATORS
-```sql
 CREATE GENERATOR GEN_NRO_FACTURA;
 SET GENERATOR GEN_NRO_FACTURA TO 1;
 
 CREATE GENERATOR GEN_ID_PRODUCTO;
 SET GENERATOR GEN_ID_PRODUCTO TO 1;
 
-```
 
-* * *
-#### EXCEPTIONS
-```sql
+----------------------------------------------------------
+-- EXCEPTIONS
+----------------------------------------------------------
+
 CREATE EXCEPTION EX_PRODUCTO_ID 'NO SE PUEDE CAMBIAR EL ID DEL PRODUCTO';
-
 CREATE EXCEPTION EX_FACTURA_NRO 'NO SE PUEDE CAMBIAR EL NRO DE LA FACTURA';
 
-```
+----------------------------------------------------------
+-- TRIGGERS
+----------------------------------------------------------
 
-* * *
-#### TRIGGERS
-
-| EVENTO | TIPO | SOBRE TABLA | TAREA QUE REALIZA |
-| :---------: | :---------: | :---------: | :---------: |
-| INSERT | BEFORE | PRODUCTO | AUTOINCREMENTAR EL VALOR DE ID DE LA TABLA PRODUCTO EN 1 |
-| UPDATE | BEFORE | PRODUCTO | NO PERMITIR EL CAMBIO DE ID DEL PRODUCTO |
-| INSERT | BEFORE | FACTURA | AUTOINCREMENTAR EL VALOR DEL NRO DE LA FACTURA EN 1 |
-| UPDATE | BEFORE | FACTURA | NO PERMITIR EL CAMBIO DE NRO DE LA FACTURA |
-
-```sql
 SET TERM ^ ;
 
 CREATE TRIGGER TRG_BI_PRODUCTO FOR TABLA_PRODUCTO 
@@ -112,4 +96,3 @@ END^
 
 SET TERM ; ^
 
-```
